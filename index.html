@@ -3,28 +3,25 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="0; url=redirect.json">
-  <title>Redireccionando...</title>
+  <title>Redirigiendo...</title>
   <script>
-    async function redirect() {
+    async function go() {
       try {
-        // Cargar el archivo con el link
-        const res = await fetch("redirect.json?cachebust=" + Date.now());
+        const res = await fetch("redirect.json?cache=" + Date.now());
         const data = await res.json();
-
         if (data.url) {
-          window.location.href = data.url;
+          window.location.replace(data.url); // Redirección automática
         } else {
           document.body.innerHTML = "<h2>No se encontró la URL de redirección</h2>";
         }
-      } catch (e) {
+      } catch (err) {
         document.body.innerHTML = "<h2>Error cargando la redirección</h2>";
       }
     }
-    redirect();
+    go();
   </script>
 </head>
 <body>
-  <p>Redireccionando, por favor espera...</p>
+  <p>Redirigiendo, por favor espera...</p>
 </body>
 </html>
